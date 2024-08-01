@@ -11,6 +11,7 @@ aws ecr create-repository --repository-name reportportal-service-authorization -
 aws ecr create-repository --repository-name reportportal-service-jobs --profile {aws-profile} --region us-east-1
 aws ecr create-repository --repository-name reportportal-service-auto-analyzer --profile {aws-profile} --region us-east-1
 aws ecr create-repository --repository-name reportportal-service-metrics-gatherer --profile {aws-profile} --region us-east-1
+aws ecr create-repository --repository-name reportportal-migrations --profile {aws-profile} --region us-east-1
 aws ecr create-repository --repository-name rabbitmq --profile {aws-profile} --region us-east-1
 aws ecr create-repository --repository-name opensearch --profile {aws-profile} --region us-east-1
 aws ecr create-repository --repository-name traefik --profile {aws-profile} --region us-east-1
@@ -25,6 +26,7 @@ docker pull reportportal/service-authorization:5.11.1
 docker pull reportportal/service-jobs:5.11.1
 docker pull reportportal/service-auto-analyzer:5.11.0-r1
 docker pull reportportal/service-metrics-gatherer:5.11.0-r1
+docker pull reportportal/migrations:5.11.1
 docker pull bitnami/rabbitmq:3.13.2
 docker pull traefik:v2.11.2
 
@@ -58,6 +60,10 @@ docker push {account-id}.dkr.ecr.us-east-1.amazonaws.com/reportportal-service-au
 docker tag reportportal/service-metrics-gatherer:5.11.0-r1 {account-id}.dkr.ecr.us-east-1.amazonaws.com/reportportal-service-metrics-gatherer:5.11.0-r1
 docker push {account-id}.dkr.ecr.us-east-1.amazonaws.com/reportportal-service-metrics-gatherer:5.11.0-r1
 
+# For ReportPortal Migrations
+docker tag reportportal/migrations:5.11.1 {account-id}.dkr.ecr.us-east-1.amazonaws.com/reportportal-reportportal-migrations:5.11.1
+docker push {account-id}.dkr.ecr.us-east-1.amazonaws.com/reportportal-reportportal-migrations:5.11.1
+
 # For RabbitMQ
 docker tag bitnami/rabbitmq:3.13.2 {account-id}.dkr.ecr.us-east-1.amazonaws.com/rabbitmq:3.13.2
 docker push {account-id}.dkr.ecr.us-east-1.amazonaws.com/rabbitmq:3.13.2
@@ -78,6 +84,7 @@ aws ecr describe-images --repository-name rabbitmq --profile {aws-profile} --reg
 {account-id}.dkr.ecr.us-east-1.amazonaws.com/opensearch
 {account-id}.dkr.ecr.us-east-1.amazonaws.com/rabbitmq
 {account-id}.dkr.ecr.us-east-1.amazonaws.com/reportportal-service-metrics-gatherer
+{account-id}.dkr.ecr.us-east-1.amazonaws.com/reportportal-migrations
 {account-id}.dkr.ecr.us-east-1.amazonaws.com/reportportal-service-auto-analyzer
 {account-id}.dkr.ecr.us-east-1.amazonaws.com/reportportal-service-jobs
 {account-id}.dkr.ecr.us-east-1.amazonaws.com/reportportal-service-authorization
